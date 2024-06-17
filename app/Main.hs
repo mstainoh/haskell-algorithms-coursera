@@ -1,6 +1,7 @@
-module Main (main) where
+module Main where
 
-import Lib
+import MyLib
 
-main :: IO ()
-main = someFunc
+main :: IO()
+main = do
+    someFunc
