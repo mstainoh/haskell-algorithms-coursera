@@ -7,6 +7,13 @@ import GraphFunctions
 import Kosaraju
 import FileParser
 
+parseEdgeList :: String -> [Edge]
+parseEdgeList ss = map toTup $ map parseInts (lines ss)
+    where
+        toTup :: [Int] -> (Node, Node)
+        toTup [] = error "empty List"
+        toTup (x:xs) = (x, head xs)
+
 main :: IO()
 main = do
     let fname = "week1.txt"
@@ -14,7 +21,7 @@ main = do
     handle <- hOpenFile fpath ReadMode
     contents <- hReadFile handle
 
-    let edges = map (\(x:xs) -> (x, head xs)) $ map (parseInts) (lines contents)
+    let edges = parseEdgeList contents
     let g = fromEdges edges
     
     putStrLn "Running"
