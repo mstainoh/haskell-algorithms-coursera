@@ -59,7 +59,7 @@ library
     import:           warnings
 
     -- Modules exported by the library.
-    exposed-modules: MyLib, GraphFunctions, WeekOne
+    exposed-modules: MyLib, GraphFunctions, FileParser, Kosaraju
 
     -- Modules included in this library but not exported.
     other-modules:
@@ -69,7 +69,7 @@ library
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.17.2.1, containers
+    build-depends:    base ^>=4.17.2.1, containers, directory
 
     -- Directories containing source files.
     hs-source-dirs:   src
@@ -77,12 +77,12 @@ library
     -- Base language which the package is written in.
     default-language: Haskell2010
 
-executable kosaraju
+executable week1
     -- Import common warning flags.
     import:           warnings
 
     -- .hs or .lhs file containing the Main module.
-    main-is:          Kosaraju.hs
+    main-is:          Week1.hs
 
     -- Modules included in this executable, other than Main.
     -- other-modules:

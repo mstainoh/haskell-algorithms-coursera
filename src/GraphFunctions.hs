@@ -1,8 +1,10 @@
 module GraphFunctions (
     Node, Edge, Graph, emptyGraph,
-    addNode, getNodes, addEdge, addDoubleEdge, reverseGraph,
-    depthFirstSearch, depthFirstSearchFull, kosaraju
-) where
+    addNode, getNodes, 
+    addEdge, addDoubleEdge, fromEdges,
+    reverseGraph,
+    depthFirstSearch, depthFirstSearchFull
+ ) where
 
 import qualified Data.Map as Map
 import Data.Map(Map)
@@ -31,6 +33,9 @@ addEdge:: Graph -> Edge -> Graph
 addEdge g e = Map.adjust (Set.insert $ snd e) (fst e) g_new
     where g_new = foldl addNode g [fst e, snd e]
 
+fromEdges :: [Edge] -> Graph 
+fromEdges = foldl addEdge emptyGraph
+
 addDoubleEdge :: Graph -> Edge -> Graph
 addDoubleEdge g e = addEdge  (addEdge g e) (snd e, fst e)
 
@@ -57,27 +62,7 @@ depthFirstSearch g u (visited, nodeFinishTimes)
 depthFirstSearchFull :: Graph -> (Set Node, [Node])
 depthFirstSearchFull g = foldr (depthFirstSearch g) (Set.empty, []) (getNodes g)
 
-kosaraju:: Graph -> [[Node]]
-kosaraju g = sccs
-    where
-        grev = reverseGraph g
-
-        -- first pass
-        (_, nodeOrder) = depthFirstSearchFull grev
-
-        -- second pass
-        collectSCCs :: [Node] -> (Set Node, [[Node]]) -> [[Node]]
-        collectSCCs [] (_, sccList) = sccList -- once the list of nodes is exhausted, finish
-        collectSCCs (n:ns) (visited, sccList)
-            | Set.member n visited = collectSCCs ns (visited, sccList) -- if the node is visited, skip it
-            | otherwise = -- if it is not visited, collect the nodes using depthFirstSerach
-                let (newVisited, scc) = depthFirstSearch g n (visited, [])
-                in collectSCCs ns (newVisited, scc : sccList)
-            
-        sccs = collectSCCs nodeOrder (Set.empty, [])
-
-
-
+-- test function
 main :: IO()
 main = do
     let edges = [(1,2), (2,3), (3,4), (4,2), (4, 5), (6, 1)]
@@ -87,19 +72,3 @@ main = do
     print(g)
     print("graph reversed:")
     print(grev)
-
-    let nodes = getNodes g
-    let (_, nodeOrder) = depthFirstSearchFull grev
-    
-    putStrLn "First Pass"
-    print nodeOrder
-
-    let sccs = kosaraju g
-
-    putStrLn "Strongly Connected Components:"
-    print sccs
-
-    -- print("Second pass")
-    -- let (visited_2, node_order_2) = depthFirstSearchFull g (take 2 node_order)
-    -- print(visited_2)
-    -- print(node_order_2) 
