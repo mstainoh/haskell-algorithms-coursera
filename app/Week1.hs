@@ -7,12 +7,12 @@ import GraphFunctions
 import Kosaraju
 import FileParser
 
-parseEdgeList :: String -> [Edge]
+parseEdgeList :: String -> [Edge Bool]
 parseEdgeList ss = map toTup $ map parseInts (lines ss)
     where
-        toTup :: [Int] -> (Node, Node)
+        toTup :: [Int] -> (Node, Node, Bool)
         toTup [] = error "empty List"
-        toTup (x:xs) = (x, head xs)
+        toTup (x:xs) = (x, head xs, True)
 
 main :: IO()
 main = do

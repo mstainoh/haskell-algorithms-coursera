@@ -11,7 +11,7 @@ import qualified Data.Set as Set
 ------------
 -- main function
 -------------
-kosaraju:: Graph -> [[Node]]
+kosaraju:: Graph a -> [[Node]]
 kosaraju g = sccs
     where
         grev = reverseGraph g
@@ -35,7 +35,7 @@ kosaraju g = sccs
 -------------
 main :: IO()
 main = do
-    let edges = [(1,2), (2,3), (3,4), (4,2), (4, 5), (6, 1)]
+    let edges = [(1,2,True), (2,3, True), (3,4, True), (4,2, True), (4, 5, True), (6, 1, True)]
     let g = fromEdges edges
     let grev = reverseGraph g
     print("graph:")
