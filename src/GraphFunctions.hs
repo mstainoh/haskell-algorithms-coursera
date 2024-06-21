@@ -5,7 +5,12 @@ module GraphFunctions (
     depthFirstSearch, depthFirstSearchFull
  ) where
 
--- same as graph functions but now edges have values
+---------------
+-- Graph manipulation
+-- Graph are double hash tables (node -> node -> a), "a" can be anything, but in a simple case is a boolean (place holder) or a distance (float)
+-- edges are tuples (Node, Node, "a")
+-- Nodes are integers
+------------
 
 import qualified Data.Map as Map
 import Data.Map(Map)
@@ -22,14 +27,14 @@ emptyGraph = Map.empty
 ---------------
 -- Graph manipulation
 ------------
--- if key in map, ignore, otherwise create it as empty set
+-- add the node to the graph, if key in map, ignore, otherwise create it as empty set. O(log n)
 addNode:: Graph a -> Node -> Graph a
 addNode g node = Map.insertWith (const id) node Map.empty g
 
 getNodes:: Graph a -> [Node]
 getNodes = Map.keys
 
--- add keys, then add the second node to the first, i.e. v1: {...} -> v1: {v2, ...}
+-- add the keys, then add the second node to the first, i.e. v1: {...} -> v1: {v2, ...}. O(log m + log n)
 addEdge:: Graph a -> Edge a -> Graph a
 addEdge g e = Map.adjust (Map.insert n2 val) n1 g_new
     where 
@@ -39,11 +44,14 @@ addEdge g e = Map.adjust (Map.insert n2 val) n1 g_new
 fromEdges :: [Edge a] -> Graph a
 fromEdges = foldl addEdge emptyGraph
 
+-- adds a double edge (e.g. non directed graphs)
 addDoubleEdge :: Graph a -> Edge a -> Graph a
 addDoubleEdge g e = addEdge  (addEdge g e) (n2, n1, val)
     where 
         (n1, n2, val) = e
 
+-- reverses the graph, double fold {u1: {v1: a1, v2: a2}, u2: {...} ). First on each value v_i inside each key u, then for each key u
+-- Supposed to be in O(m * log m), since m operations, each insert is O(log m) in the heap 
 reverseGraph :: Graph a -> Graph a
 reverseGraph g_old = Map.foldlWithKey (\g u vs -> Map.foldlWithKey (\g v val -> addEdge g (v, u, val)) g vs) emptyGraph g_old 
 

@@ -5,12 +5,13 @@ module Main where
 ----
 
 import MyLib
-import FileParser
-import System.IO
+import FileParser(testRead)
+--import System.IO
 
 main :: IO()
 main = do
   someFunc
+  testRead
 
 
 
