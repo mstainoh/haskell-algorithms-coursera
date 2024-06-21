@@ -77,12 +77,12 @@ library
     -- Base language which the package is written in.
     default-language: Haskell2010
 
-executable week2
+executable graphs2
     -- Import common warning flags.
     import:           warnings
 
     -- .hs or .lhs file containing the Main module.
-    main-is:          Week2.hs
+    main-is:          GraphsWeek2.hs
 
     -- Other library packages from which modules are imported.
     build-depends:
@@ -96,12 +96,12 @@ executable week2
     -- Base language which the package is written in.
     default-language: Haskell2010
 
-executable week1
+executable graphs1
     -- Import common warning flags.
     import:           warnings
 
     -- .hs or .lhs file containing the Main module.
-    main-is:          Week1.hs
+    main-is:          GraphsWeek1.hs
 
     -- Other library packages from which modules are imported.
     build-depends:

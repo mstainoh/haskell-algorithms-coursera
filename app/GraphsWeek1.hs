@@ -1,7 +1,7 @@
 module Main where
 
 import Data.List (sortOn)
-import System.IO (IOMode(ReadMode)) 
+import System.IO (IOMode(ReadMode), openFile, hGetContents, hClose) 
 
 import GraphFunctions
 import Kosaraju
@@ -16,10 +16,10 @@ parseEdgeList ss = map toTup $ map parseInts (lines ss)
 
 main :: IO()
 main = do
-    let fname = "week1.txt"
+    let fname = "graphsWeek1.txt"
     fpath <- getFilePathFromName fname
-    handle <- hOpenFile fpath ReadMode
-    contents <- hReadFile handle
+    handle <- openFile fpath ReadMode
+    contents <- hGetContents handle
 
     let edges = parseEdgeList contents
     let g = fromEdges edges
@@ -32,4 +32,4 @@ main = do
     print "top 5 scc size:"
     print (take 5 $ sortOn negate $ map length sccs)
 
-    hCloseFile handle
+    hClose handle
