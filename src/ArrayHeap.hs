@@ -1,3 +1,11 @@
+{-
+Heap implementation using arrays
+haskell is not very easy for this since
+ -lists are stacks: O(1) for head insert/pop but O(n) for lookup
+ -vectors are immutable: O(1) for lookup but O(n) for pop/insert
+
+We use Sequence which is a double linked list with tree-like structure and supports O(log n) for lookup and O(1) for head insert/pop  
+-}
 module ArrayHeap (
     Heap, Policy, emptyHeap,
     getSize, getHeight, getValue,
