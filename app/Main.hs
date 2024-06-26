@@ -5,7 +5,7 @@ module Main where
 ----
 
 import MyLib
-import FileParser(testRead)
+import ReadData(testRead)
 --import System.IO
 
 main :: IO()

@@ -1,6 +1,6 @@
 import Dykstra
 import GraphFunctions
-import FileParser
+import ReadData
 import System.IO (IOMode(ReadMode), openFile, hGetContents, hClose) 
 import Data.List.Split (splitOn)
 

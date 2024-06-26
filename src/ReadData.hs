@@ -1,24 +1,18 @@
-module FileParser 
+{-
+Auxiliary functions for IO handling
+-}
+module ReadData
     (
-      getFilePathFromName , dataFolder, getCurrentDirectory
-      ,parseInts, parseWords
+      getFilePathFromName , dataFolder
+      ,getCurrentDirectory
       --,hOpenFile, hCloseFile, hReadFile
       ,hGetContentsLines
       ,testRead
-    ) where
+    ) 
+  where
 
 import System.Directory (getCurrentDirectory)
 import System.IO (hGetLine, hIsEOF, Handle, IOMode(ReadMode), hClose, openFile)
-
-
---------------------
--- File handling functions (UNUSED)
---------------------
--- hCloseFile :: Handle -> IO ()
--- hCloseFile = hClose
-
--- hOpenFile :: FilePath -> IOMode -> IO Handle
--- hOpenFile = openFile
 
 --------------------
 -- Path functions
@@ -34,7 +28,7 @@ getFilePathFromName filename = do
     return (dir ++ dataFolder ++ filename)
 
 --------------------
--- File reading functions
+-- Aux File reading functions
 --------------------
 hGetContentsLines :: Handle -> Int -> IO [String]
 hGetContentsLines handle n
@@ -47,23 +41,14 @@ hGetContentsLines handle n
         else do
           rest <- hGetContentsLines handle (n-1)  -- Recursively read remaining lines
           return (line : rest)  -- Prepend current line to the rest of the lines
-
---------------------
--- File parsing functions (UNUSED)
---------------------
--- | Parse a string containing whitespace-separated integers into a list of integers.
-parseInts :: String -> [Int]
-parseInts = map read . words
-
--- | Parse a string into a list of words.
-parseWords :: String -> [String]
-parseWords = words
-
-
+  
 --------------------
 -- Test
 --------------------
 -- test
+parseInts :: String -> [Int]
+parseInts = map read . words 
+
 testRead :: IO ()
 testRead = do
   let fname = "week1.txt"
@@ -75,4 +60,5 @@ testRead = do
   hClose handle
   putStrLn "Read Lines:"
   putStrLn . unlines $ contents
+
   print $ map parseInts contents

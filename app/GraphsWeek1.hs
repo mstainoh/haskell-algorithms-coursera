@@ -1,11 +1,12 @@
-module Main where
-
 import Data.List (sortOn)
 import System.IO (IOMode(ReadMode), openFile, hGetContents, hClose) 
 
 import GraphFunctions
 import Kosaraju
-import FileParser
+import ReadData
+
+parseInts :: String -> [Int]
+parseInts = map read . words
 
 parseEdgeList :: String -> [Edge Bool]
 parseEdgeList ss = map toTup $ map parseInts (lines ss)

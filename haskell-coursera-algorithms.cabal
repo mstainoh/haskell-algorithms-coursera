@@ -59,7 +59,7 @@ library
     import:           warnings
 
     -- Modules exported by the library.
-    exposed-modules: MyLib, GraphFunctions, FileParser, Kosaraju, Dykstra, ArrayHeap
+    exposed-modules: MyLib, GraphFunctions, ReadData, Kosaraju, Dykstra, ArrayHeap
 
     -- Modules included in this library but not exported.
     other-modules:
@@ -81,12 +81,12 @@ library
 -- Exes
 ----------------------------------------------
 
-executable graphs3rm
+executable graphs3
     -- Import common warning flags.
     import:           warnings
 
     -- .hs or .lhs file containing the Main module.
-    main-is:          GraphsWeek3RM.hs
+    main-is:          GraphsWeek3.hs
 
     -- Other library packages from which modules are imported.
     build-depends:
