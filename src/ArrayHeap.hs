@@ -6,6 +6,7 @@ haskell is not very easy for this since
 
 We use Sequence which is a double linked list with tree-like structure and supports O(log n) for lookup and O(1) for head insert/pop  
 -}
+
 module ArrayHeap (
     Heap, Policy, emptyHeap,
     getSize, getHeight, getValue,
@@ -25,6 +26,7 @@ type Heap = Seq
 data Policy = MinPolicy | MaxPolicy
 type Upwards = Bool
 
+emptyHeap :: (Ord a) => Heap a
 emptyHeap = Seq.empty
 
 -----------------------------------
@@ -148,9 +150,8 @@ fromListMax = fromList MaxPolicy
 treeView :: (Show a) => Heap a -> IO()
 treeView h = do
   let hmax = getHeight h - 1
-  let n = 0
   let xs = map (getLevelValues h) [0..hmax]
-  let s = concatMap (++ "\n") $ map show xs
+  let s = unlines $ map show xs
   print s
 
 -- heapsort: also for testing that heap is correctly built
