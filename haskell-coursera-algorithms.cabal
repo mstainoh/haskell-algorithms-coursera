@@ -59,7 +59,7 @@ library
     import:           warnings
 
     -- Modules exported by the library.
-    exposed-modules: MyLib, GraphFunctions, FileParser, Kosaraju, Dykstra
+    exposed-modules: MyLib, GraphFunctions, FileParser, Kosaraju, Dykstra, ArrayHeap
 
     -- Modules included in this library but not exported.
     other-modules:
@@ -73,6 +73,28 @@ library
 
     -- Directories containing source files.
     hs-source-dirs:   src
+
+    -- Base language which the package is written in.
+    default-language: Haskell2010
+
+----------------------------------------------
+-- Exes
+----------------------------------------------
+
+executable graphs3rm
+    -- Import common warning flags.
+    import:           warnings
+
+    -- .hs or .lhs file containing the Main module.
+    main-is:          GraphsWeek3RM.hs
+
+    -- Other library packages from which modules are imported.
+    build-depends:
+        base ^>=4.17.2.1,
+        haskell-coursera-algorithms
+
+    -- Directories containing source files.
+    hs-source-dirs:   app
 
     -- Base language which the package is written in.
     default-language: Haskell2010
