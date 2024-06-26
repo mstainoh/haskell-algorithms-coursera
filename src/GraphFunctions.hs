@@ -16,12 +16,13 @@ import qualified Data.Map as Map
 import Data.Map(Map)
 import Data.Set (Set)
 import qualified Data.Set as Set
-import Data.List (intercalate)
+
 
 type Node = Int
 type Edge a = (Node, Node, a)
 type Graph a = Map Node (Map Node a)
 
+emptyGraph :: Graph a
 emptyGraph = Map.empty
 
 ---------------

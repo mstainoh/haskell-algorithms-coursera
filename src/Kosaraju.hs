@@ -1,4 +1,4 @@
-module Kosaraju(kosaraju) where
+module Kosaraju(kosaraju, test) where
 
 --------------------
 -- Week 1: kosaraju algorithm for SCCs
@@ -33,8 +33,8 @@ kosaraju g = sccs
 ------------
 -- test
 -------------
-main :: IO()
-main = do
+test :: IO()
+test = do
     let edges = [(1,2,True), (2,3, True), (3,4, True), (4,2, True), (4, 5, True), (6, 1, True)]
     let g = fromEdges edges
     let grev = reverseGraph g

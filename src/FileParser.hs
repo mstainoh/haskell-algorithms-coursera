@@ -8,8 +8,7 @@ module FileParser
     ) where
 
 import System.Directory (getCurrentDirectory)
-import System.IO (hGetLine, hIsEOF, Handle, hGetContents)
-import System.IO (IOMode(ReadMode), hClose, openFile)
+import System.IO (hGetLine, hIsEOF, Handle, IOMode(ReadMode), hClose, openFile)
 
 
 --------------------
@@ -69,7 +68,7 @@ testRead :: IO ()
 testRead = do
   let fname = "week1.txt"
   fpath <- getFilePathFromName fname
-  n <- (putStrLn "Enter the number of lines to read: " >> getLine)
+  n <- putStrLn "Enter the number of lines to read: " >> getLine
   let numLines = read n ::Int
   handle <- openFile fpath ReadMode
   contents <- hGetContentsLines handle numLines
